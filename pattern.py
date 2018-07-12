@@ -46,4 +46,17 @@ isPhoneNumber_1('My number is 415-555-4242.')
 
 # Matching Multiple Groups with the Pipe################################################################################
 import re
-def isPhoneNumber(message)
+def isHero(message):
+    heroRegex = re.compile(r'Batman|Tina Fey')
+    print(heroRegex.search(message).group())
+
+isHero('Batman and Tina Fey.')
+isHero('Tina FeyX and Tina Fey.')
+
+# Prefix #################################################################################################################
+import re
+def prefHero(message):
+    prefRegex = re.compile(r'Bat(man|mobile|copter|bat)')
+    print(prefRegex.search(message).group())
+
+prefHero('Batmobile lost a wheel')
