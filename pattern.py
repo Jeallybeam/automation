@@ -1,5 +1,7 @@
 # Finding Patterns of Text Without Regular Expressions##################################################################
 import re
+
+
 def isPhoneNumber(text):
     if len(text) != 12:
         return False
@@ -18,21 +20,25 @@ def isPhoneNumber(text):
             return False
     return True
 
+
 message = 'Call me at 415-555-1011 tomorrow. 415-555-9999 is my office.'
 for i in range(len(message)):
-    chunk = message[i:i+12]
+    chunk = message[i:i + 12]
     if isPhoneNumber(chunk):
         print('Phone number found: ' + chunk)
 print('Done')
 
 ########################################################################################################################
 import re
+
+
 def isPhoneNumber(message):
     phoneNumRegex = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
     print(phoneNumRegex.search(message).group())
 
 
 isPhoneNumber('My number is 415-555-4242.')
+
 
 def isPhoneNumber_1(message):
     phoneNumRegex = re.compile(r'(\d\d\d)-(\d\d\d-\d\d\d\d)')
@@ -41,22 +47,142 @@ def isPhoneNumber_1(message):
     print(phoneNumRegex.search(message).group(2))
     print(phoneNumRegex.search(message).group(1, 2))
 
-isPhoneNumber_1('My number is 415-555-4242.')
 
+isPhoneNumber_1('My number is 415-555-4242.')
 
 # Matching Multiple Groups with the Pipe################################################################################
 import re
+
+
 def isHero(message):
     heroRegex = re.compile(r'Batman|Tina Fey')
     print(heroRegex.search(message).group())
 
+
 isHero('Batman and Tina Fey.')
 isHero('Tina FeyX and Tina Fey.')
 
-# Prefix #################################################################################################################
+# Prefix ###############################################################################################################
 import re
+
+
 def prefHero(message):
     prefRegex = re.compile(r'Bat(man|mobile|copter|bat)')
     print(prefRegex.search(message).group())
+    print(prefRegex.search(message).group(1))
+
 
 prefHero('Batmobile lost a wheel')
+
+
+# Optional Matching with the Question Mark #############################################################################
+import re
+
+
+def optionalHero(message):
+    optionRegex = re.compile(r'Bat(wo)?man')
+    print(optionRegex.search(message).group())
+
+
+optionalHero('The Adventures of Batwoman')
+
+
+# Optional are number #############################################################################
+import re
+
+
+def areaNumber(message):
+    areaRegex = re.compile(r'(\d\d\d-)?\d\d\d-\d\d\d\d')
+    print(areaRegex.search(message).group())
+
+
+areaNumber('My number is 415-555-4242')
+areaNumber('My number is 555-4242')
+
+
+# Matching Zero or More with the Star ##################################################################################
+import re
+
+
+def zeroormoreHero(message):
+    optionRegex = re.compile(r'Bat(wo)*man')
+    print(optionRegex.search(message).group())
+
+
+zeroormoreHero('The Adventures of Batwoman')
+zeroormoreHero('The Adventures of Batman')
+zeroormoreHero('The Adventures of Batwowowowoman')
+
+
+# Matching One or More with the Plus ##################################################################################
+import re
+
+
+def zeroormoreHero(message):
+    optionRegex = re.compile(r'Bat(wo)+man')
+    print(optionRegex.search(message).group())
+
+
+zeroormoreHero('The Adventures of Batwoman')
+'''zeroormoreHero('The Adventures of Batman')''' #Will cause Exception
+zeroormoreHero('The Adventures of Batwowowowoman')
+
+
+# Matching Specific Repetitions with Curly Brackets ####################################################################
+import re
+
+
+def curlyBrackets(message):
+    curlyRegex = re.compile(r'(Ha){3}')
+    mo = curlyRegex.search(message)
+    if mo == None:
+        print(mo)
+    else:
+        print(mo.group())
+
+
+curlyBrackets('HaHaHa')
+curlyBrackets('Ha')
+
+
+# Greedy Matching ########################################################################################
+import re
+
+
+def greedy(message):
+    greedyRegex = re.compile(r'(Ha){3,5}')
+    print(greedyRegex.search(message).group())
+
+
+greedy('HaHaHaHaHa')
+
+
+# Nongreedy Matching ########################################################################################
+import re
+
+
+
+def nonGreedy(message):
+    nonGreedyRegex = re.compile(r'(Ha){3,5}?')
+    print(nonGreedyRegex.search(message).group())
+
+
+nonGreedy('HaHaHaHaHa')
+
+
+# The findall() Method ########################################################################################
+import re
+
+
+def findall(message):
+    findallRegex = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d') # has groups
+    mo = findallRegex.findall(message)
+    for i in mo:
+        print('Number: ' + i)
+
+
+
+findall('Cell: 415-555-9999 Work: 212-555-0000')
+
+
+# Character Classes ########################################################################################
