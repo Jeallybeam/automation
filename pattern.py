@@ -175,7 +175,7 @@ import re
 
 
 def findall(message):
-    findallRegex = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d') # has groups
+    findallRegex = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
     mo = findallRegex.findall(message)
     for i in mo:
         print('Number: ' + i)
@@ -186,3 +186,81 @@ findall('Cell: 415-555-9999 Work: 212-555-0000')
 
 
 # Character Classes ########################################################################################
+import re
+
+
+def vowel(message):
+    vowelRegex = re.compile(r'[aeiouAEIOU]')
+    mo = vowelRegex.findall(message)
+    print(mo)
+
+
+vowel('RoboCop eats baby food. BABY FOOD.')
+
+
+# negative Character Classes ########################################################################################
+import re
+
+
+def vowel(message):
+    vowelRegex = re.compile(r'[^aeiouAEIOU]')
+    mo = vowelRegex.findall(message)
+    print(mo)
+
+
+vowel('RoboCop eats baby food. BABY FOOD.')
+
+
+# The Caret and Dollar Sign Characters ###############################################################################
+'''For example, the r'^Hello' regular expression string matches strings
+that begin with 'Hello'''
+import re
+
+
+def caret(message):
+    caretRegex = re.compile(r'^Hello') '''For example, the r'^Hello' regular expression string matches strings
+                                        that begin with 'Hello'.'''
+    mo = caretRegex.findall(message)
+    print(mo)
+
+
+caret('Hello world!')
+caret('He said hello.')
+#
+#
+#
+'''The r'\d$' regular expression string matches strings that end with a
+numeric character from 0 to 9.'''
+import re
+
+
+def caret(message):
+    caretRegex = re.compile(r'\d$')
+    mo = caretRegex.findall(message)
+    print(mo)
+
+
+caret('Your number is 42')
+caret('Your number is forty two.')
+#
+#
+#
+'''The r'^\d+$' regular expression string matches strings that both begin
+and end with one or more numeric characters.'''
+import re
+
+
+def caret(message):
+    caretRegex = re.compile(r'^\d+$')
+    mo = caretRegex.findall(message)
+    print(mo)
+
+
+caret('1234567890')
+caret('12345xyz67890')
+caret('12 34567890')
+
+
+
+# The Wildcard Character ###############################################################################
+
