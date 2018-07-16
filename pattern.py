@@ -263,4 +263,112 @@ caret('12 34567890')
 
 
 # The Wildcard Character ###############################################################################
+import re
 
+
+def wildcard(message):
+    wildcardRegex = re.compile(r'.at')
+    mo = wildcardRegex.findall(message)
+    print(mo)
+
+
+wildcard('The cat in the hat sat on the flat mat.')
+
+
+# Matching Everything with Dot-Star ###############################################################################
+import re
+
+
+def name(message):
+    namedRegex = re.compile(r'First Name: (.*) Last Name: (.*)')
+    mo = namedRegex.search(message).group(1)
+    mo1 = namedRegex.search(message).group(2)
+    print(mo)
+    print(mo1)
+
+
+name('First Name: Al Last Name: Sweigart.')
+#
+#
+#Non Greedy
+import re
+
+
+def name(message):
+    namedRegex = re.compile(r'<.*?>')
+    mo = namedRegex.search(message).group()
+    print(mo)
+
+
+name('<To serve man> for dinner.>')
+#
+#
+#Greedy
+import re
+
+
+def name(message):
+    namedRegex = re.compile(r'<.*>')
+    mo = namedRegex.search(message).group()
+    print(mo)
+
+
+name('<To serve man> for dinner.>')
+
+
+
+# Matching Newlines with the Dot Character #############################################################################
+import re
+
+
+def newline(message):
+    newlineRegex = re.compile(r'.*', re.DOTALL)
+    mo = newlineRegex.search(message).group()
+    print(mo)
+
+
+newline('Serve the public trust.\nProtect the innocent.\nUphold the law.')
+
+
+
+#Substituting Strings with the sub() Method#############################################################################
+import re
+
+
+def substituting(message):
+    namesRegex = re.compile(r'Agent \w+')
+    mo = namesRegex.sub('CENSORED', message)
+    print(mo)
+
+
+substituting('Agent Alice gave the secret documents to Agent Bob.')
+#
+#
+#
+import re
+
+
+def substituting(message):
+    namesRegex = re.compile(r'Agent (\w)\w*')
+    mo = namesRegex.sub(r'\1****', message)
+    print(mo)
+
+
+substituting('Agent Alice told Agent Carol that Agent Eve knew Agent Bob was a double agent.')
+
+
+
+#Managing Complex Regexes#############################################################################
+phoneRegex = re.compile(r'((\d{3}|\(\d{3}\))?(\s|-|\.)?\d{3}(\s|-|\.)\d{4}
+(\s*(ext|x|ext.)\s*\d{2,5})?)')
+#
+#
+#
+phoneRegex = re.compile(r'''(
+ (\d{3}|\(\d{3}\))?           # area code
+ (\s|-|\.)?                   # separator
+ \d{3}                        # first 3 digits
+ (\s|-|\.)                    # separator
+ \d{4}                        # last 4 digits
+ (\s*(ext|x|ext.)\s*\d{2,5})? # extension
+ )''', re.VERBOSE)
